@@ -1,0 +1,228 @@
+.adminMain {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+
+.adminHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.adminTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.adminTitle span { color: var(--primary); }
+
+.section {
+  background: rgba(18, 18, 20, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.adminRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.adminList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.jobCard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.jobCard:hover { border-color: rgba(255,255,255,0.12); }
+
+.jobCardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+}
+
+.jobCardMeta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.875rem;
+}
+
+.jobCardDesc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  max-height: 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+.jobCardDesc::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+
+.jobCardActions {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.btnApprove {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: rgba(22,163,74,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(22,163,74,0.25);
+  border-radius: var(--r-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnApprove:hover { background: rgba(22,163,74,0.25); }
+
+.btnReject {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: rgba(220,38,38,0.12);
+  color: #f87171;
+  border: 1px solid rgba(220,38,38,0.2);
+  border-radius: var(--r-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnReject:hover { background: rgba(220,38,38,0.22); }
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.adminTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3rem 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-right: 0.375rem;
+  margin-bottom: 0.375rem;
+}
+
+.adminTagsWrap { margin-top: 0.75rem; flex-wrap: wrap; display: flex; }
+
+.deniedWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.deniedIcon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.deniedTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.deniedSub { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ─── Admin Responsivo ────────────────────────── */
+
+@media (max-width: 640px) {
+  .adminMain { padding: 1.5rem 1rem; }
+  .adminHeader { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .adminTitle { font-size: 1.375rem; }
+  .adminRow { flex-direction: column; }
+  .section { padding: 1.125rem; }
+  .jobCardActions { flex-wrap: wrap; }
+  .btnApprove, .btnReject { flex: 1; justify-content: center; }
+}
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .adminMain { padding: 2rem 1.5rem; max-width: 100%; }
+}
+
+@media (min-width: 1440px) {
+  .adminMain { max-width: 1100px; padding: 4rem 2rem; }
+  .adminTitle { font-size: 2.25rem; }
+  .section { padding: 2rem; }
+  .jobCardTitle { font-size: 1.125rem; }
+}

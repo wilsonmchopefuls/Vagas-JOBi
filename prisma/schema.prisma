@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model JobPost {
+  id          String   @id @default(cuid())
+  type        String   // "vagas" | "freelancers"
+  status      String   @default("APPROVED") // "PENDING", "APPROVED", "REJECTED"
+  discordId   String
+  createdAt   DateTime @default(now())
+  payload     String
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  discordId String   @unique
+  addedBy   String?
+  createdAt DateTime @default(now())
+}
+
+model User {
+  discordId String   @id
+  name      String
+  image     String?
+  createdAt DateTime @default(now())
+}
