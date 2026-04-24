@@ -76,7 +76,7 @@ export default function AdminManager({ allAdmins, isRoot }) {
               />
             )}
             
-            <input type="hidden" name="discordId" value={selectedUser?.discordId || query} required />
+            <input type="hidden" name="discordId" value={selectedUser?.discordId ?? ''} required />
 
             {/* Dropdown Results */}
             {open && (query.length >= 2) && (
@@ -113,7 +113,7 @@ export default function AdminManager({ allAdmins, isRoot }) {
             )}
           </div>
 
-          <button type="submit" className="btn-primary" style={{ width: "auto", whiteSpace: "nowrap" }} disabled={!selectedUser && !query}>
+          <button type="submit" className="btn-primary" style={{ width: "auto", whiteSpace: "nowrap" }} disabled={!selectedUser}>
             + Promover
           </button>
         </div>

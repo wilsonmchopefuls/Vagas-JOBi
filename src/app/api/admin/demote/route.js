@@ -7,6 +7,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { isRootAdmin, demoteAdmin } from '../../../../services/job.service';
 import { verifyCsrf } from '../../../../lib/csrf';
+import { promoteSchema } from '../../../../validations/schemas';
 
 export async function POST(request) {
   if (!verifyCsrf(request)) {
@@ -20,13 +21,19 @@ export async function POST(request) {
   const hasPermission = await isRootAdmin(session.user.id);
   if (!hasPermission) return NextResponse.redirect(new URL('/', request.url));
 
+  let data;
   try {
     const formData = await request.formData();
-    const discordId = formData.get('discordId');
+    // Valida Snowflake — mesma regra do promote
+    data = promoteSchema.parse({ discordId: formData.get('discordId') });
+  } catch {
+    return NextResponse.redirect(new URL('/admin?error=invalid_id', request.url));
+  }
 
+  try {
     // Não pode despromover a si mesmo (Root)
-    if (discordId !== session.user.id) {
-      await demoteAdmin(discordId);
+    if (data.discordId !== session.user.id) {
+      await demoteAdmin(data.discordId);
     }
   } catch (err) {
     console.error('[POST /api/admin/demote]', err);
@@ -34,3 +41,4 @@ export async function POST(request) {
 
   return NextResponse.redirect(new URL('/admin', request.url));
 }
+

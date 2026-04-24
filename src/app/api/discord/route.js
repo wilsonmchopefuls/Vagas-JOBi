@@ -1,14 +1,16 @@
-/**
- * POST /api/discord
- * Controlador fino: valida → delega ao service → responde.
- */
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]/route';
 import { jobSchema } from '../../../validations/schemas';
 import { createJobPost, RateLimitError } from '../../../services/job.service';
+import { verifyCsrf } from '../../../lib/csrf';
 
 export async function POST(request) {
+  // 0. CSRF — bloqueia requisições cross-origin
+  if (!verifyCsrf(request)) {
+    return NextResponse.json({ error: 'Requisição inválida.' }, { status: 403 });
+  }
+
   // 1. Autenticação
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {

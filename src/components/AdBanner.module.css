@@ -1,0 +1,130 @@
+/* ─── AdBanner.module.css ──────────────────────────────────────────────── */
+
+/* ── Floating (canto inferior direito) ── */
+.float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 900;
+  width: 220px;
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  animation: fadeSlideUp 0.3s ease-out;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.floatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.6rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.adLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.closeBtn:hover { color: rgba(255, 255, 255, 0.7); }
+
+.floatFallback {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.floatFallback:hover { background: rgba(255, 255, 255, 0.04); color: #fff; }
+
+.star { font-size: 1rem; flex-shrink: 0; }
+
+.floatImg {
+  display: block;
+}
+
+.floatImg img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ── Horizontal (topo de conteúdo) ── */
+.horizontal {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.hFallback {
+  flex: 1;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.hFallback:hover { color: #fff; }
+
+.hLink {
+  flex: 1;
+  display: block;
+  overflow: hidden;
+  border-radius: 0.375rem;
+}
+
+.hImg {
+  display: block;
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.hClose {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.hClose:hover { color: rgba(255, 255, 255, 0.6); }
+
+@media (max-width: 480px) {
+  .float { width: 180px; bottom: 1rem; right: 1rem; }
+}

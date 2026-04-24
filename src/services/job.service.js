@@ -112,7 +112,13 @@ export async function approveJobPost(id) {
     throw new Error('Postagem não encontrada ou já processada.');
   }
 
-  const body = JSON.parse(job.payload);
+  let body;
+  try {
+    body = JSON.parse(job.payload);
+  } catch {
+    throw new Error(`Payload corrompido na postagem ${id}. Não foi possível enviar ao Discord.`);
+  }
+
   await sendToDiscord({ body, discordId: job.discordId });
   await prisma.jobPost.update({ where: { id }, data: { status: 'APPROVED' } });
 }

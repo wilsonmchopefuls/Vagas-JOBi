@@ -54,3 +54,34 @@ model UserThemePreference {
   themeId String
   theme   Theme  @relation(fields: [themeId], references: [id], onDelete: Cascade)
 }
+
+// ─── Formulário Customizável ──────────────────────────────────────────────────
+
+model FormConfig {
+  key       String   @id     // 'job_levels' | 'job_regimes' | 'edu_institutions' | 'edu_courses' | 'edu_levels'
+  options   Json     @default("[]")
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Sistema de Anúncios Centralizado ────────────────────────────────────────
+
+model Ad {
+  id        String    @id @default(cuid())
+  imageUrl  String    // URL da imagem do criativo
+  targetUrl String    // URL de destino ao clicar
+  altText   String    @default("Anúncio") // acessibilidade
+  active    Boolean   @default(true)
+  weight    Int       @default(1)  // peso para rotação: maior = aparece mais
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  clicks    AdClick[]
+}
+
+model AdClick {
+  id        String   @id @default(cuid())
+  adId      String
+  ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
+  ip        String?  // hasheado antes de salvar
+  createdAt DateTime @default(now())
+}

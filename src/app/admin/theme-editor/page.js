@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import Link from 'next/link';
 import s from './theme-editor.module.css';
 import { buildThemeCss } from '../../../lib/theme-css';
 
@@ -30,9 +31,13 @@ const DEFAULT_CONFIG = {
 
 // Mapeia --primary para rgba glow automaticamente
 function hexToGlowRgba(hex, alpha) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
+  // Valida formato — garante que o parse não gere NaN no CSS
+  if (typeof hex !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(hex)) {
+    return `rgba(220,38,38,${alpha})`; // fallback seguro (vermelho padrão)
+  }
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
@@ -117,7 +122,14 @@ export default function ThemeEditorPage() {
   const [saving, setSaving] = useState(false);
   const [activating, setActivating] = useState(false);
   const [toast, setToast] = useState(null);
-  const [exitModal, setExitModal] = useState(null); // { href } or null
+  const [exitModal, setExitModal] = useState(null);
+  const [resetModal, setResetModal] = useState(false);
+
+  // ─── Toast ──────────────────────────────────────────────────────
+  const showToast = (msg, type) => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  };
 
   const config = configs[activeSlot];
   const name = names[activeSlot];
@@ -263,14 +275,6 @@ export default function ThemeEditorPage() {
     showToast('♻️ Visual original restaurado. Salve para aplicar.', 'success');
   };
 
-  const [resetModal, setResetModal] = useState(false);
-
-  // ─── Toast ────────────────────────────────────────────────────────────────
-  const showToast = (msg, type) => {
-    setToast({ msg, type });
-    setTimeout(() => setToast(null), 3500);
-  };
-
   // ─── Troca de slot com aviso ──────────────────────────────────────────────
   const switchSlot = (slot) => {
     if (isDirty) {
@@ -283,6 +287,22 @@ export default function ThemeEditorPage() {
   // ─── Render ───────────────────────────────────────────────────────────────
   return (
     <div className={s.page}>
+      {/* Botão voltar */}
+      <div style={{ marginBottom: '1.25rem' }}>
+        <Link
+          href="/admin"
+          className={s.backLink}
+          onClick={e => {
+            if (isDirty) {
+              e.preventDefault();
+              setExitModal({ action: () => { window.location.href = '/admin'; } });
+            }
+          }}
+        >
+          ← Voltar ao Painel Admin
+        </Link>
+      </div>
+
       <div className={s.header}>
         <div>
           <h1 className={s.title}>🎨 Editor de <span>Temas</span></h1>
@@ -292,6 +312,7 @@ export default function ThemeEditorPage() {
           {isDirty && <span className={s.dirtyBadge}>⚠ Mudanças não salvas</span>}
         </div>
       </div>
+
 
       <div className={s.layout}>
         {/* ── Painel de Controles ──────────────────────────────────── */}

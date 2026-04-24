@@ -58,10 +58,20 @@ export default async function AdminPage() {
   return (
     <div className={styles.adminMain}>
 
-      <div style={{ marginBottom: '1.5rem' }}>
+      <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
         <Link href="/" className={styles.backBtn}>
           ← Voltar para a Tela Inicial
         </Link>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <Link href="/admin/form-config" className={styles.formConfigBtn}>
+            📋 Configurar Formulário
+          </Link>
+          {isRoot && (
+            <Link href="/admin/theme-editor" className={styles.themeEditorBtn}>
+              🎨 Editor de Temas
+            </Link>
+          )}
+        </div>
       </div>
 
       <div className={styles.adminHeader}>
@@ -88,7 +98,19 @@ export default async function AdminPage() {
         ) : (
           <div className={styles.adminList}>
             {pendingJobs.map((job) => {
-              const payload = JSON.parse(job.payload);
+              let payload;
+              try {
+                payload = JSON.parse(job.payload);
+              } catch {
+                // Payload corrompido — exibe card de erro em vez de quebrar a página
+                return (
+                  <div key={job.id} className={styles.jobCard}>
+                    <p className={styles.jobCardTitle} style={{ color: '#f87171' }}>
+                      ⚠️ Postagem com dados corrompidos (ID: {job.id})
+                    </p>
+                  </div>
+                );
+              }
               return (
                 <div key={job.id} className={styles.jobCard}>
                   <p className={styles.jobCardTitle}>

@@ -13,8 +13,8 @@ export const vagaSchema = z.object({
   type:        z.literal('vagas'),
   title:       shortText('Título da vaga'),
   company:     shortText('Nome da empresa'),
-  level:       z.enum(['Estágio', 'Júnior', 'Pleno', 'Sênior', 'Especialista'], { message: 'Nível inválido.' }),
-  regime:      z.enum(['CLT', 'PJ', 'Freelancer', 'Outro'], { message: 'Regime inválido.' }),
+  level:       z.string().min(1, 'Nível obrigatório.').max(100),
+  regime:      z.string().min(1, 'Regime obrigatório.').max(100),
   description: longText('Descrição'),
   contact:     contactText,
 });

@@ -4,7 +4,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]/route';
-import { isAdmin } from '../../../../lib/is-admin';
+import { isRootAdmin } from '../../../../services/job.service';
 import {
   getThemeBySlot,
   upsertTheme,
@@ -22,8 +22,9 @@ export async function GET(_, { params }) {
 
 export async function PUT(request, { params }) {
   const session = await getServerSession(authOptions);
-  if (!await isAdmin(session)) {
-    return NextResponse.json({ error: 'Apenas admins podem editar temas.' }, { status: 403 });
+  const ok = session?.user?.id && await isRootAdmin(session.user.id);
+  if (!ok) {
+    return NextResponse.json({ error: 'Apenas o Root Admin pode editar temas.' }, { status: 403 });
   }
 
   const slot = Number(params.slot);
@@ -45,8 +46,9 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(_, { params }) {
   const session = await getServerSession(authOptions);
-  if (!await isAdmin(session)) {
-    return NextResponse.json({ error: 'Apenas admins podem deletar temas.' }, { status: 403 });
+  const ok = session?.user?.id && await isRootAdmin(session.user.id);
+  if (!ok) {
+    return NextResponse.json({ error: 'Apenas o Root Admin pode deletar temas.' }, { status: 403 });
   }
 
   const slot = Number(params.slot);

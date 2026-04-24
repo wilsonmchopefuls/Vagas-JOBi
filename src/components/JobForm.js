@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { TOP_FACULDADES, CURSOS, NIVEIS_ENSINO } from "../data/education";
 import styles from "../app/page.module.css";
 import { BRAND } from "../lib/brand";
 import ThemeSelector from "./ThemeSelector";
@@ -121,7 +120,7 @@ function SearchableSelect({ options, value, onChange, placeholder, allowOther = 
 }
 
 // ─── Componente: Bloco de Formação ─────────────────────────────────────────
-function EducationBlock({ idx, data, onChange, onRemove }) {
+function EducationBlock({ idx, data, onChange, onRemove, config }) {
   return (
     <div style={{
       background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)',
@@ -141,7 +140,7 @@ function EducationBlock({ idx, data, onChange, onRemove }) {
       <div className="input-group">
         <label className="input-label">Instituição</label>
         <SearchableSelect
-          options={TOP_FACULDADES}
+          options={config?.edu_institutions || []}
           value={data.institution}
           onChange={v => onChange({ ...data, institution: v })}
           placeholder="Buscar faculdade..."
@@ -153,7 +152,7 @@ function EducationBlock({ idx, data, onChange, onRemove }) {
         <div className="input-group" style={{ flex: 2 }}>
           <label className="input-label">Curso</label>
           <SearchableSelect
-            options={CURSOS}
+            options={config?.edu_courses || []}
             value={data.course}
             onChange={v => onChange({ ...data, course: v })}
             placeholder="Buscar curso..."
@@ -164,7 +163,7 @@ function EducationBlock({ idx, data, onChange, onRemove }) {
           <label className="input-label">Nível</label>
           <select className="input-field" value={data.level} onChange={e => onChange({ ...data, level: e.target.value })}>
             <option value="">Selecione...</option>
-            {NIVEIS_ENSINO.map(n => <option key={n} value={n}>{n}</option>)}
+            {(config?.edu_levels || []).map(n => <option key={n} value={n}>{n}</option>)}
           </select>
         </div>
       </div>
@@ -191,6 +190,8 @@ export default function JobForm() {
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState({ type: '', message: '' });
 
+  const [formConfig, setFormConfig] = useState(null);
+
   const [form, setForm] = useState({
     title: '', company: '', level: 'Júnior', regime: 'CLT',
     description: '', contact: '', skills: '', portfolio: '',
@@ -199,8 +200,18 @@ export default function JobForm() {
 
   const [educations, setEducations] = useState([emptyEdu()]);
 
+  useEffect(() => {
+    fetch('/api/form-config')
+      .then(r => r.json())
+      .then(data => {
+        setFormConfig(data);
+        setForm(f => ({ ...f, level: data.job_levels[0] || '', regime: data.job_regimes[0] || '' }));
+      })
+      .catch(console.error);
+  }, []);
+
   const resetForm = () => {
-    setForm({ title: '', company: '', level: 'Júnior', regime: 'CLT', description: '', contact: '', skills: '', portfolio: '', availability: '' });
+    setForm({ title: '', company: '', level: formConfig?.job_levels[0] || '', regime: formConfig?.job_regimes[0] || '', description: '', contact: '', skills: '', portfolio: '', availability: '' });
     setEducations([emptyEdu()]);
     setStep(1);
     setFeedback({ type: '', message: '' });
@@ -257,6 +268,11 @@ export default function JobForm() {
     );
   }
 
+  // ─── Loading formConfig ─────────────────────────────────────────────────
+  if (!formConfig) {
+    return <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', animation: 'pulse 1.5s infinite' }}>Carregando formulário...</div>;
+  }
+
   // ─── Submit ─────────────────────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -305,13 +321,13 @@ export default function JobForm() {
           <div className="input-group" style={{ flex: 1 }}>
             <label className="input-label">Nível</label>
             <select name="level" value={form.level} onChange={set} className="input-field">
-              {['Estágio','Júnior','Pleno','Sênior','Especialista'].map(l => <option key={l}>{l}</option>)}
+              {(formConfig?.job_levels || []).map(l => <option key={l} value={l}>{l}</option>)}
             </select>
           </div>
           <div className="input-group" style={{ flex: 1 }}>
             <label className="input-label">Regime</label>
             <select name="regime" value={form.regime} onChange={set} className="input-field">
-              {['CLT','PJ','Freelancer','Outro'].map(r => <option key={r}>{r}</option>)}
+              {(formConfig?.job_regimes || []).map(r => <option key={r} value={r}>{r}</option>)}
             </select>
           </div>
         </div>
@@ -381,6 +397,7 @@ export default function JobForm() {
           {educations.map((edu, i) => (
             <EducationBlock
               key={i} idx={i} data={edu}
+              config={formConfig}
               onChange={(val) => updateEducation(i, val)}
               onRemove={() => removeEducation(i)}
             />
@@ -486,10 +503,6 @@ export default function JobForm() {
               </a>
             )}
           </div>
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-            @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-          `}} />
         </div>
       )}
 

@@ -16,20 +16,22 @@ export async function POST(request) {
 
   // 1. Autenticação
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id) return NextResponse.redirect(new URL('/', request.url));
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 });
+  }
 
-  // 2. Autorização (Apenas ROOT pode promover)
   const hasPermission = await isRootAdmin(session.user.id);
-  if (!hasPermission) return NextResponse.redirect(new URL('/', request.url));
+  if (!hasPermission) {
+    return NextResponse.json({ error: 'Acesso negado. Apenas o Root Admin pode promover.' }, { status: 403 });
+  }
 
   // 3. Validação do Discord ID (Zod: exige Snowflake, bloqueia IDs falsos/injetados)
   let data;
   try {
     const formData = await request.formData();
     data = promoteSchema.parse({ discordId: formData.get('discordId') });
-  } catch (err) {
-    // Redireciona com parâmetro de erro para exibir no painel
-    return NextResponse.redirect(new URL('/admin?error=invalid_id', request.url));
+  } catch {
+    return NextResponse.json({ error: 'ID do Discord inválido. Deve conter 17–20 dígitos.' }, { status: 400 });
   }
 
   // 4. Promove o usuário

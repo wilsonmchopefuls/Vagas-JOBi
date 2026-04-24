@@ -2,13 +2,14 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../../auth/[...nextauth]/route';
-import { isAdmin } from '../../../../../lib/is-admin';
+import { isRootAdmin } from '../../../../../services/job.service';
 import { getThemeBySlot, setDefaultTheme } from '../../../../../services/theme.service';
 
 export async function PUT(_, { params }) {
   const session = await getServerSession(authOptions);
-  if (!await isAdmin(session)) {
-    return NextResponse.json({ error: 'Apenas admins podem definir o tema padrão.' }, { status: 403 });
+  const ok = session?.user?.id && await isRootAdmin(session.user.id);
+  if (!ok) {
+    return NextResponse.json({ error: 'Apenas o Root Admin pode definir o tema padrão.' }, { status: 403 });
   }
 
   const slot = Number(params.slot);
