@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import s from './AdminJobActions.module.css';
 
 export default function AdminJobActions({ jobId }) {
@@ -8,6 +9,7 @@ export default function AdminJobActions({ jobId }) {
   const [reason, setReason] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleApprove = async () => {
     setLoading(true);
@@ -20,8 +22,11 @@ export default function AdminJobActions({ jobId }) {
         method: 'POST',
         body: fd
       });
-      if (res.ok) window.location.reload();
-      else setError('Erro ao aprovar.');
+      if (res.ok) {
+        router.refresh(); // Soft refresh na página atual
+      } else {
+        setError('Erro ao aprovar.');
+      }
     } catch (e) {
       console.error(e);
       setError('Erro interno.');
@@ -45,8 +50,12 @@ export default function AdminJobActions({ jobId }) {
         method: 'POST',
         body: fd
       });
-      if (res.ok) window.location.reload();
-      else setError('Erro ao rejeitar.');
+      if (res.ok) {
+        setIsModalOpen(false);
+        router.refresh(); // Soft refresh da rota atual
+      } else {
+        setError('Erro ao rejeitar.');
+      }
     } catch (e) {
       console.error(e);
       setError('Erro interno.');

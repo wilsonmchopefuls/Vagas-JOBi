@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import s from './NotificationsMenu.module.css';
 
 // Ícone do Sino
@@ -22,6 +23,7 @@ export default function NotificationsMenu() {
   const [loading, setLoading] = useState(true);
   const [selectedNotif, setSelectedNotif] = useState(null); // Modal details
   const ref = useRef(null);
+  const router = useRouter();
 
   const fetchNotifs = async () => {
     try {
@@ -121,7 +123,8 @@ export default function NotificationsMenu() {
                     className={`${s.item} ${s.itemClickable}`}
                     onClick={() => {
                       if (isSystemAdmin) {
-                        window.location.href = '/admin';
+                        router.push('/admin');
+                        setOpen(false); // Fecha o dropdown ao navegar
                       } else {
                         setSelectedNotif(n);
                       }
