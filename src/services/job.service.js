@@ -141,7 +141,7 @@ export async function approveJobPost(id) {
 /**
  * Rejeita uma vaga pendente.
  */
-export async function rejectJobPost(id) {
+export async function rejectJobPost(id, reason) {
   const job = await prisma.jobPost.findUnique({ where: { id } });
   if (job && job.status === 'PENDING') {
     await prisma.jobPost.update({ where: { id }, data: { status: 'REJECTED' } });
@@ -151,7 +151,7 @@ export async function rejectJobPost(id) {
       data: {
         discordId: job.discordId,
         title: '❌ Publicação Rejeitada',
-        message: `Sua postagem de ${job.type === 'vagas' ? 'Vaga' : 'Freelancer'} não foi aprovada pela moderação.`,
+        message: `Sua postagem de ${job.type === 'vagas' ? 'Vaga' : 'Freelancer'} não foi aprovada pela moderação.\nMotivo: ${reason}`,
       }
     });
   }

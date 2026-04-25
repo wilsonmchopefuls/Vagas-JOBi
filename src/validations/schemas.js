@@ -50,4 +50,11 @@ export const promoteSchema = z.object({
 export const moderationActionSchema = z.object({
   id:     z.string().cuid('ID de postagem inválido.'),
   action: z.enum(['APPROVE', 'REJECT'], { message: 'Ação inválida.' }),
-});
+  reason: z.string().optional(),
+}).refine(data => {
+  if (data.action === 'REJECT') {
+    if (!data.reason || data.reason.trim().length < 20) return false;
+    if (data.reason.trim().length > 200) return false;
+  }
+  return true;
+}, { message: 'Motivo da recusa deve ter entre 20 e 200 caracteres.' });

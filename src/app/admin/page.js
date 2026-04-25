@@ -5,6 +5,7 @@ import { bootstrapAdmin } from "../../services/job.service";
 import styles from "./admin.module.css";
 
 import AdminManager from "../../components/AdminManager";
+import AdminJobActions from "../../components/AdminJobActions";
 import Link from "next/link";
 
 export default async function AdminPage() {
@@ -124,18 +125,7 @@ export default async function AdminPage() {
                   <div className={styles.jobCardDesc}>
                     {payload.description || payload.skills}
                   </div>
-                  <div className={styles.jobCardActions}>
-                    <form action="/api/admin/action" method="POST">
-                      <input type="hidden" name="id" value={job.id} />
-                      <input type="hidden" name="action" value="APPROVE" />
-                      <button type="submit" className={styles.btnApprove}>✅ Aprovar</button>
-                    </form>
-                    <form action="/api/admin/action" method="POST">
-                      <input type="hidden" name="id" value={job.id} />
-                      <input type="hidden" name="action" value="REJECT" />
-                      <button type="submit" className={styles.btnReject}>❌ Rejeitar</button>
-                    </form>
-                  </div>
+                  <AdminJobActions jobId={job.id} />
                 </div>
               );
             })}

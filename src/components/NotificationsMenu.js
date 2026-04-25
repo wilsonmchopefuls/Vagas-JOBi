@@ -20,6 +20,7 @@ export default function NotificationsMenu() {
   const [open, setOpen] = useState(false);
   const [notifs, setNotifs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedNotif, setSelectedNotif] = useState(null); // Modal details
   const ref = useRef(null);
 
   const fetchNotifs = async () => {
@@ -112,12 +113,24 @@ export default function NotificationsMenu() {
                 if (n.title.includes('🛡️')) icon = '🛡️';
                 if (n.title.includes('🔻')) icon = '🔻';
 
+                let isSystemAdmin = n.isSystem && n.title.includes('Moderação');
+
                 return (
-                  <li key={n.id} className={s.item}>
+                  <li 
+                    key={n.id} 
+                    className={`${s.item} ${s.itemClickable}`}
+                    onClick={() => {
+                      if (isSystemAdmin) {
+                        window.location.href = '/admin';
+                      } else {
+                        setSelectedNotif(n);
+                      }
+                    }}
+                  >
                     <div className={s.itemIcon}>{icon}</div>
                     <div className={s.itemContent}>
                       <h4 className={s.itemTitle}>{n.title.replace(/[✅❌🛡️🔻]\s*/, '')}</h4>
-                      <p className={s.itemMessage}>{n.message}</p>
+                      <p className={s.itemMessageLineClamp}>{n.message}</p>
                       <span className={s.itemTime}>{formatTime(n.createdAt)}</span>
                     </div>
                   </li>
@@ -125,6 +138,16 @@ export default function NotificationsMenu() {
               })}
             </ul>
           )}
+        </div>
+      )}
+      {selectedNotif && (
+        <div className={s.modalOverlay} onClick={() => setSelectedNotif(null)}>
+          <div className={s.modalContent} onClick={e => e.stopPropagation()}>
+            <h3 className={s.modalTitle}>{selectedNotif.title}</h3>
+            <p className={s.modalMessage}>{selectedNotif.message}</p>
+            <span className={s.modalTime}>{formatTime(selectedNotif.createdAt)}</span>
+            <button className={s.btnOk} onClick={() => setSelectedNotif(null)}>Fechar</button>
+          </div>
         </div>
       )}
     </div>
