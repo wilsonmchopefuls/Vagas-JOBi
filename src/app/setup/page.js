@@ -527,6 +527,10 @@ export default function SetupPage() {
                 validation={validations.NEXT_PUBLIC_DISCORD_SERVER_URL}
               />
 
+              <div style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: 'rgba(234, 179, 8, 0.1)', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '8px', fontSize: '0.9rem', color: '#fef08a' }}>
+                <strong>⚠️ Aviso importante:</strong> Ao clicar em concluir, o sistema criará o banco de dados e o servidor será encerrado sozinho. Não se assuste se o site parecer que "caiu". Após concluir, volte no seu terminal e inicie o site novamente com <code style={{ color: '#fff', backgroundColor: 'rgba(0,0,0,0.3)', padding: '2px 4px', borderRadius: '4px' }}>npm run dev</code>.
+              </div>
+
               {saveError && (
                 <div className={s.saveError}>⚠️ {saveError}</div>
               )}
