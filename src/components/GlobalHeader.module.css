@@ -46,7 +46,7 @@
 .logoText {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .navLink:hover {
-  color: #fff;
+  color: var(--text);
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -90,7 +90,7 @@
 }
 
 .downloadBtn:hover {
-  color: #fff;
+  color: var(--text);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.16);
 }
@@ -230,7 +230,7 @@
 .dropdownName {
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -266,7 +266,7 @@
 
 .dropdownItem:hover {
   background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  color: var(--text);
 }
 
 .dropdownSignOut {

@@ -119,7 +119,7 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #fff 30%, #71717a 100%);
+  background: linear-gradient(135deg, var(--text) 30%, var(--text-muted) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -317,7 +317,7 @@
   justify-content: center;
   gap: 0.6rem;
   padding: 0.8125rem 1.75rem;
-  background: #5865F2;
+  background: var(--discord);
   color: #fff;
   border: none;
   border-radius: var(--r-md);
@@ -341,7 +341,7 @@
 }
 
 .btnDiscord:hover {
-  background: #4752c4;
+  background: var(--discord-h);
   transform: translateY(-1px);
   box-shadow: 0 6px 24px rgba(88,101,242,0.4);
 }

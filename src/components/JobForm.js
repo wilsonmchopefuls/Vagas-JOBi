@@ -532,7 +532,7 @@ export default function JobForm() {
             </div>
 
             {/* Título */}
-            <h3 style={{ marginBottom: '0.6rem', color: '#fff', fontSize: '1.45rem', fontWeight: 700, lineHeight: 1.2 }}>
+            <h3 style={{ marginBottom: '0.6rem', color: 'var(--text)', fontSize: '1.45rem', fontWeight: 700, lineHeight: 1.2 }}>
               {feedback.type === 'success'
                 ? feedback.isPending ? 'Enviado para aprovação! ⏳' : 'Publicado com sucesso! 🎉'
                 : 'Ops, algo deu errado'}
