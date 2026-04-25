@@ -191,9 +191,9 @@ Admin salva tema → Banco atualizado → Próximo request de qualquer usuário 
 ---
 
 ## 🧙 Método 1 — Setup Wizard (recomendado)
-
 > Ideal para quem quer configurar tudo pelo navegador, com guias explicativos em cada etapa.
 
+ABRA O TERMINAL
 ```bash
 # 1. Clone o repositório
 git clone https://github.com/WilsonTeofilo/Vagas-JOB-discord.git
@@ -206,11 +206,11 @@ npm install
 npm run dev
 ```
 
-Abra `http://localhost:3000` — o wizard inicia automaticamente e guia você por 5 etapas:
+copie do seu terminal o endereço localhost, ex: `http://localhost:3000` — após isso, cole no topo da barra de pesquisa do seu navegador, o wizard inicia automaticamente e guia você por 5 etapas:
 
 | Etapa | O que configura |
 |-------|----------------|
-| 1️⃣ Banco de Dados | URL de conexão PostgreSQL (Neon DB). **Nota:** Crie o projeto, clique no botão "Connect" e copie a "Connection string" (clique no ícone de "Copy" para vir a senha junto, se copiar o texto com asteriscos vai dar erro). Não ative o "Neon Auth". |
+| 1️⃣ Banco de Dados | URL de conexão PostgreSQL (Neon DB). **Nota:** Crie o projeto, clique no botão "Connect" e copie a "Connection string" (clique em show password e em seguida vá no ícone de "Copy" para vir a senha junto, se copiar o texto com asteriscos vai dar erro). Não ative o "Neon Auth". |
 | 2️⃣ Webhooks Discord | URLs dos canais de vagas e freelancers |
 | 3️⃣ App Discord | Client ID e Client Secret para OAuth2. Acesse a aba "OAuth2", crie um Redirect, cole a URL exata do seu site e salve. |
 | 4️⃣ Autenticação | NEXTAUTH_SECRET (pode gerar automaticamente) e URL do site |
