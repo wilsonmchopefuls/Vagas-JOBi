@@ -99,8 +99,8 @@ export function buildThemeCss(theme) {
   if (c.bgType === 'gif' && c.bgGifUrl && isSafeUrl(c.bgGifUrl)) {
     const safeUrl = c.bgGifUrl.trim();
     const blurPx = Math.min(20, Math.max(0, Number(c.bgBlur) || 0));
-    css += `\nbody{background-image:url("${safeUrl}");background-size:cover;background-position:center;background-attachment:fixed;}`;
-    css += `\nbody::before{background-image:none!important;backdrop-filter:blur(${blurPx}px);background:rgba(0,0,0,0.3);}`;
+    css += `\n#theme-bg{position:fixed;inset:0;z-index:-2;background-image:url("${safeUrl}");background-size:cover;background-position:center;}`;
+    css += `\n#theme-bg::after{content:"";position:absolute;inset:0;backdrop-filter:blur(${blurPx}px);background:rgba(0,0,0,0.3);}`;
   }
 
   return css;

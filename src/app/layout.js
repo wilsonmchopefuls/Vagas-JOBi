@@ -68,6 +68,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div id="theme-bg" aria-hidden="true" />
         <ThemeProvider>
           <ThemePreviewListener />
           <Providers>
