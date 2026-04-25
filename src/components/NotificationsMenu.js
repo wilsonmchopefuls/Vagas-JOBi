@@ -24,7 +24,7 @@ export default function NotificationsMenu() {
 
   const fetchNotifs = async () => {
     try {
-      const res = await fetch('/api/notifications');
+      const res = await fetch(`/api/notifications?_t=${Date.now()}`, { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         setNotifs(data);

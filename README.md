@@ -40,6 +40,7 @@ O **Trampo** é uma aplicação web que serve como mural de oportunidades para c
 - **Publicar Vagas** de emprego com empresa, nível, regime e descrição
 - **Publicar Perfil de Freelancer** com especialidade, skills, portfólio e formação acadêmica
 - **Formulário em etapas** para guiar o preenchimento sem erros
+- **Caixa de Notificações** no cabeçalho: saiba imediatamente se sua vaga foi aprovada ou rejeitada
 - **Seletor de Tema Visual** — cada usuário pode escolher entre os temas criados pelo admin
 
 ### 🛡️ Para Administradores
@@ -49,6 +50,7 @@ O **Trampo** é uma aplicação web que serve como mural de oportunidades para c
 - **Bypass de Rate Limit** para admins publicarem vagas ilimitadas
 - **Editor de Temas Visuais** com preview em tempo real
 - **Editor de Opções do Formulário**: personaliza os níveis, regimes, faculdades, cursos e formações que aparecem no formulário de publicação — com tags visuais, reset para padrão e salvamento por categoria
+- **Notificação Dinâmica de Pendências**: o sino 🔔 exibe alertas em tempo real se existirem vagas aguardando aprovação
 - **Sistema de Anúncios**: cadastro, edição e remoção de banners/links patrocinados exibidos no site, com contador de cliques
 
 ### 🎨 Sistema de Temas (Admin)
@@ -218,7 +220,9 @@ copie do seu terminal o endereço localhost, ex: `http://localhost:3000` — ap�
 
 Ao concluir o Wizard, o `.env.local` é gerado e a aplicação vai dar uma leve desconectada (o servidor encerrará sozinho).
 
-**PASSO MAIS IMPORTANTE: Sincronizar o banco de dados**
+### ⚠️ PASSO OBRIGATÓRIO: Sincronizar o banco de dados
+
+**Se você não fizer isso, o site vai quebrar com erro 500 ao tentar publicar vagas ou ler notificações, pois as tabelas não existirão no banco de dados!**
 
 1. Vá para o terminal onde o servidor estava rodando. Se ele não parou, pressione `CTRL+C`.
 2. Rode o comando abaixo para criar as tabelas no seu banco Neon DB:
