@@ -11,25 +11,25 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.6rem 1.5rem;
-  background: rgba(220, 38, 38, 0.06);
-  border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--text-muted);
 }
 
 .adminBarBtn {
   padding: 0.3rem 0.85rem;
   border-radius: 0.4rem;
-  background: rgba(220, 38, 38, 0.15);
-  border: 1px solid rgba(220, 38, 38, 0.3);
-  color: #f87171;
+  background: var(--primary-glow);
+  border: 1px solid var(--primary);
+  color: var(--primary);
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
   transition: background 0.15s;
 }
 
-.adminBarBtn:hover { background: rgba(220, 38, 38, 0.25); }
+.adminBarBtn:hover { background: var(--primary); color: #fff; }
 
 /* ── Hero ── */
 .hero {
@@ -47,11 +47,11 @@
   gap: 0.5rem;
   padding: 0.35rem 0.9rem;
   border-radius: 999px;
-  background: rgba(220, 38, 38, 0.08);
-  border: 1px solid rgba(220, 38, 38, 0.2);
+  background: var(--primary-glow);
+  border: 1px solid var(--primary);
   font-size: 0.78rem;
   font-weight: 600;
-  color: #f87171;
+  color: var(--primary);
   letter-spacing: 0.04em;
   margin-bottom: 2rem;
 }
@@ -80,10 +80,7 @@
 }
 
 .heroAccent {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--primary);
 }
 
 .heroLead {
@@ -109,19 +106,19 @@
   gap: 0.5rem;
   padding: 0.9rem 2rem;
   border-radius: 0.75rem;
-  background: var(--accent, #dc2626);
+  background: var(--primary);
   color: #fff;
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.35);
+  box-shadow: 0 4px 20px var(--primary-glow);
 }
 
 .ctaPrimary:hover {
-  background: #ef4444;
+  background: var(--primary-h);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(220, 38, 38, 0.45);
+  box-shadow: 0 8px 28px var(--primary-glow);
 }
 
 .ctaSecondary {
@@ -178,7 +175,7 @@
   transform: translateX(-50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
 }

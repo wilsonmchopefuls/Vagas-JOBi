@@ -87,7 +87,7 @@
 .adminTitle span { color: var(--primary); }
 
 .section {
-  background: rgba(18, 18, 20, 0.75);
+  background: var(--bg-card);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);

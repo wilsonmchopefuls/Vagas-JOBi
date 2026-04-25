@@ -84,16 +84,16 @@ function SearchableSelect({ options, value, onChange, placeholder, allowOther = 
       {open && (query.length > 0 || filtered.length > 0) && (
         <div style={{
           position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0, zIndex: 50,
-          background: '#18181b', border: '1px solid var(--border)', borderRadius: 'var(--r-md)',
+          background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)',
           boxShadow: '0 8px 24px rgba(0,0,0,0.5)', maxHeight: '220px', overflowY: 'auto',
         }}>
           {filtered.map(opt => (
             <div key={opt} onMouseDown={() => select(opt)} style={{
               padding: '0.6rem 1rem', cursor: 'pointer', fontSize: '0.9rem',
-              borderBottom: '1px solid rgba(255,255,255,0.04)',
+              borderBottom: '1px solid var(--border)',
               transition: 'background 0.15s',
             }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(220,38,38,0.1)'}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--primary-glow)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
               {opt}
             </div>
@@ -123,7 +123,7 @@ function SearchableSelect({ options, value, onChange, placeholder, allowOther = 
 function EducationBlock({ idx, data, onChange, onRemove, config }) {
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)',
+      background: 'var(--bg-card)', border: '1px solid var(--border)',
       borderRadius: 'var(--r-md)', padding: '1rem', marginBottom: '0.75rem',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
@@ -462,7 +462,7 @@ export default function JobForm() {
           onClick={e => { if (e.target.id === 'feedback-modal-overlay') setFeedback({ type: '', message: '', isPending: false }); }}
         >
           <div style={{
-            background: 'linear-gradient(135deg, #1c1c22 0%, #18181b 100%)',
+            background: 'var(--bg-card)',
             padding: '2.5rem 2rem 2rem',
             borderRadius: 'var(--r-lg)',
             border: `1px solid ${

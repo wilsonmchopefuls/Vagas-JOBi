@@ -29,17 +29,7 @@ const DEFAULT_CONFIG = {
   glowPosY2:   '90',
 };
 
-// Mapeia --primary para rgba glow automaticamente
-function hexToGlowRgba(hex, alpha) {
-  // Valida formato — garante que o parse não gere NaN no CSS
-  if (typeof hex !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(hex)) {
-    return `rgba(220,38,38,${alpha})`; // fallback seguro (vermelho padrão)
-  }
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
+// A conversão hexToGlowRgba foi movida para o servidor (theme-css.js)
 
 function configToApiPayload(name, config) {
   return {
@@ -51,8 +41,8 @@ function configToApiPayload(name, config) {
       bgBlur: Number(config.bgBlur),
       showGrid: config.showGrid,
       glowOpacity: Number(config.glowOpacity),
-      glowColor1: hexToGlowRgba(config.glowColor1, 0.14),
-      glowColor2: hexToGlowRgba(config.glowColor2, 0.10),
+      glowColor1: config.glowColor1,
+      glowColor2: config.glowColor2,
       glowPosX1: `${config.glowPosX1}%`,
       glowPosY1: `${config.glowPosY1}%`,
       glowPosX2: `${config.glowPosX2}%`,
@@ -160,8 +150,8 @@ export default function ThemeEditorPage() {
             bgBlur: c.bgBlur ?? 0,
             showGrid: c.showGrid !== false,
             glowOpacity: c.glowOpacity ?? 1,
-            glowColor1: '#dc2626',
-            glowColor2: '#b91c1c',
+            glowColor1: c.glowColor1 || DEFAULT_CONFIG.glowColor1,
+            glowColor2: c.glowColor2 || DEFAULT_CONFIG.glowColor2,
             glowPosX1: String(parseInt(c.glowPosX1 || '15')),
             glowPosY1: String(parseInt(c.glowPosY1 || '10')),
             glowPosX2: String(parseInt(c.glowPosX2 || '85')),

@@ -43,8 +43,8 @@
 
 /* ─── Card ─── */
 .card {
-  background: rgba(15,15,18,0.9);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
   display: flex;
@@ -118,8 +118,8 @@
 .addInput {
   flex: 1;
   padding: 0.55rem 0.875rem;
-  background: #0d0d10;
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
   color: #f4f4f5;
   font-size: 0.85rem;
@@ -127,15 +127,15 @@
   outline: none;
   transition: border-color 0.15s;
 }
-.addInput:focus { border-color: rgba(88,101,242,0.5); }
+.addInput:focus { border-color: var(--primary); }
 .addInput::placeholder { color: #3f3f46; }
 .addBtn {
   width: 36px;
   height: 36px;
-  background: rgba(88,101,242,0.15);
-  border: 1px solid rgba(88,101,242,0.3);
+  background: var(--primary-glow);
+  border: 1px solid var(--primary);
   border-radius: 0.5rem;
-  color: #818cf8;
+  color: var(--primary);
   font-size: 1.25rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -144,7 +144,7 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.addBtn:hover { background: rgba(88,101,242,0.25); }
+.addBtn:hover { background: var(--primary); color: #fff; }
 
 .hint { font-size: 0.72rem; color: #3f3f46; line-height: 1.4; font-style: italic; }
 
@@ -152,7 +152,7 @@
 .cardActions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .btnSave {
   padding: 0.55rem 1.25rem;
-  background: #5865f2;
+  background: var(--primary);
   border: none;
   border-radius: 0.5rem;
   color: #fff;
@@ -162,7 +162,7 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-.btnSave:hover:not(:disabled) { background: #4752c4; }
+.btnSave:hover:not(:disabled) { background: var(--primary-h); }
 .btnSave:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .btnReset {
@@ -186,7 +186,7 @@
 
 /* ─── Modal ─── */
 .modalOverlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 9999; display: flex; align-items: center; justify-content: center; }
-.modal { background: #18181b; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 2rem; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 24px 48px rgba(0,0,0,0.6); animation: popIn 0.25s cubic-bezier(0.16,1,0.3,1); }
+.modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 24px 48px rgba(0,0,0,0.6); animation: popIn 0.25s cubic-bezier(0.16,1,0.3,1); }
 @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 .modalIcon { font-size: 2.25rem; margin-bottom: 0.75rem; }
 .modalTitle { font-size: 1.1rem; font-weight: 700; color: #fafafa; margin-bottom: 0.5rem; }
