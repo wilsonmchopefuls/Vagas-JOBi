@@ -140,10 +140,11 @@ export default function SobrePage() {
           <div className={s.ctaRow}>
             <a
               href={BRAND.downloadUrl}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className={s.ctaPrimary}
             >
-              ⬇ Baixar Trampo (ZIP)
+              ⬇ Baixar no GitHub
             </a>
             <a
               href={BRAND.repoUrl}

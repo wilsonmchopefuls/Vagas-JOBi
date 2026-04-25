@@ -196,8 +196,8 @@ Admin salva tema → Banco atualizado → Próximo request de qualquer usuário 
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/WilsonTeofilo/trampo.git
-cd trampo
+git clone https://github.com/WilsonTeofilo/Vagas-JOB-discord.git
+cd Vagas-JOB-discord
 
 # 2. Instale as dependências
 npm install
@@ -235,8 +235,8 @@ npm run dev
 > Para quem prefere editar arquivos diretamente. Rápido e sem interface.
 
 ```bash
-git clone https://github.com/WilsonTeofilo/trampo.git
-cd trampo
+git clone https://github.com/WilsonTeofilo/Vagas-JOB-discord.git
+cd Vagas-JOB-discord
 npm install
 ```
 

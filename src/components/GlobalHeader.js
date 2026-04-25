@@ -94,7 +94,7 @@ export default function GlobalHeader() {
               aria-label="Baixar Trampo"
             >
               <DownloadIcon />
-              Download
+              Ver no GitHub
             </a>
           </nav>
 

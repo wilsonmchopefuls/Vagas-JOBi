@@ -28,10 +28,9 @@ export const BRAND = {
   repoUrl: 'https://github.com/WilsonTeofilo/Vagas-JOB-discord',
 
   /**
-   * Link de download direto do ZIP da branch main — não altere.
-   * Sempre retorna a versão mais recente.
+   * Link para o repositório no GitHub para o usuário baixar ou dar fork.
    */
-  downloadUrl: 'https://github.com/WilsonTeofilo/Vagas-JOB-discord/archive/refs/heads/main.zip',
+  downloadUrl: 'https://github.com/WilsonTeofilo/Vagas-JOB-discord',
 
   /** Link permanente de convite ao servidor Discord do fundador — não altere. */
   discordInvite: 'https://discord.gg/XwCzSwT53u',

@@ -68,11 +68,12 @@ export default async function LandingPage() {
           </Link>
           <a
             href={BRAND.downloadUrl}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className={s.ctaSecondary}
-            title="Baixar o projeto (ZIP sempre atualizado da main)"
+            title="Acessar o repositório no GitHub para instalar"
           >
-            ⬇ Baixar Grátis
+            ⬇ Baixar no GitHub
           </a>
         </div>
 
