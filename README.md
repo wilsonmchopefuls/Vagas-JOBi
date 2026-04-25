@@ -216,10 +216,18 @@ copie do seu terminal o endereço localhost, ex: `http://localhost:3000` — ap�
 | 4️⃣ Autenticação | NEXTAUTH_SECRET (pode gerar automaticamente) e URL do site |
 | 5️⃣ Comunidade | Link permanente de convite do seu servidor |
 
-Ao concluir, o `.env.local` é gerado automaticamente, as tabelas são criadas no seu banco de dados, e o servidor encerra sozinho.
+Ao concluir o Wizard, o `.env.local` é gerado e a aplicação vai dar uma leve desconectada (o servidor encerrará sozinho).
 
+**Seu próximo passo é sincronizar o banco de dados:**
+
+1. Vá para o terminal onde o servidor estava rodando. Se ele não parou, pressione `CTRL+C`.
+2. Rode o comando abaixo para criar as tabelas no seu banco Neon DB:
 ```bash
-# 6. Inicie novamente o servidor para aplicar as configurações
+npx prisma db push
+```
+
+3. Depois que o banco for sincronizado com sucesso, inicie o servidor novamente:
+```bash
 npm run dev
 ```
 

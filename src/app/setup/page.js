@@ -544,17 +544,24 @@ export default function SetupPage() {
               <div className={s.doneCheck}><IconCheck /></div>
               <h2 className={s.doneTitle}>Configuração concluída!</h2>
               <p className={s.doneDesc}>
-                O arquivo <code style={{ color: '#818cf8' }}>.env.local</code> foi gerado com sucesso e<br />
-                <strong>as tabelas do banco de dados foram criadas automaticamente!</strong><br /><br />
-                O servidor (onde você rodou "npm run dev") encerrou sozinho para aplicar as configurações.
+                O arquivo <code style={{ color: '#818cf8' }}>.env.local</code> foi gerado com sucesso!<br />
+                A aplicação vai dar uma leve desconectada (o servidor vai encerrar sozinho) para aplicar as configurações.
               </p>
 
               <div className={s.doneCmd}>
-                <div className={s.doneCmdLabel}>O que fazer agora para o site voltar a funcionar:</div>
-                <ol style={{ textAlign: 'left', margin: '0.5rem 0', fontSize: '0.9rem', color: '#a1a1aa' }}>
+                <div className={s.doneCmdLabel}>O que fazer agora para o site funcionar:</div>
+                <ol style={{ textAlign: 'left', margin: '0.5rem 0', fontSize: '0.9rem', color: '#a1a1aa', paddingLeft: '1.2rem' }}>
                   <li>Volte para o seu terminal ou prompt de comando.</li>
                   <li>Caso o processo não tenha parado, pressione <strong>CTRL + C</strong>.</li>
-                  <li>Inicie o servidor de novo copiando e colando o comando abaixo:</li>
+                  <li><strong>PASSO MAIS IMPORTANTE:</strong> Cole o comando abaixo e aperte Enter para sincronizar as tabelas no seu banco de dados:</li>
+                </ol>
+                <div className={s.codeBlock} style={{ marginBottom: '1rem' }}>
+                  <span className={s.codeValue}>npx prisma db push</span>
+                  <CopyBtn text="npx prisma db push" id="cmd-prisma" copied={copied} onCopy={copyText} />
+                </div>
+                
+                <ol style={{ textAlign: 'left', margin: '0.5rem 0', fontSize: '0.9rem', color: '#a1a1aa', paddingLeft: '1.2rem' }} start="4">
+                  <li>Depois que o banco terminar de sincronizar, inicie o servidor novamente:</li>
                 </ol>
                 <div className={s.codeBlock}>
                   <span className={s.codeValue}>npm run dev</span>
@@ -563,7 +570,7 @@ export default function SetupPage() {
               </div>
 
               <p style={{ fontSize: '0.8rem', color: '#52525b', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-                Após reiniciar, atualize a página (pressione F5) ou acesse <strong style={{ color: '#a1a1aa' }}>http://localhost:3000</strong>.
+                Após o servidor reiniciar, atualize a página (F5) ou acesse <strong style={{ color: '#a1a1aa' }}>http://localhost:3000</strong>.
                 <br /><br />
                 <strong>Você será o dono!</strong> Ao fazer o login com o Discord pela primeira vez, sua conta será registrada automaticamente como Administrador Root.
               </p>
