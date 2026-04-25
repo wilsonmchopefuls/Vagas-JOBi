@@ -210,19 +210,16 @@ Abra `http://localhost:3000` — o wizard inicia automaticamente e guia você po
 
 | Etapa | O que configura |
 |-------|----------------|
-| 1️⃣ Banco de Dados | URL de conexão PostgreSQL (Neon DB recomendado) |
+| 1️⃣ Banco de Dados | URL de conexão PostgreSQL (Neon DB). **Nota:** Não ative o "Neon Auth". |
 | 2️⃣ Webhooks Discord | URLs dos canais de vagas e freelancers |
 | 3️⃣ App Discord | Client ID e Client Secret para OAuth2 |
 | 4️⃣ Autenticação | NEXTAUTH_SECRET (pode gerar automaticamente) e URL do site |
 | 5️⃣ Comunidade | Link permanente de convite do seu servidor |
 
-Ao concluir, o `.env.local` é gerado automaticamente e o servidor reinicia sozinho.
+Ao concluir, o `.env.local` é gerado automaticamente, as tabelas são criadas no seu banco de dados, e o servidor encerra sozinho.
 
 ```bash
-# 6. Após o servidor reiniciar, crie as tabelas (apenas na primeira vez)
-npx prisma db push
-
-# 7. Inicie novamente
+# 6. Inicie novamente o servidor para aplicar as configurações
 npm run dev
 ```
 

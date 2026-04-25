@@ -294,9 +294,9 @@ export default function SetupPage() {
 
               <Hint title="Como criar seu banco no Neon DB" defaultOpen>
                 <HintStep n="1">Acesse <strong>neon.tech</strong> e crie uma conta gratuita.</HintStep>
-                <HintStep n="2">Clique em <strong>"New Project"</strong>, dê um nome (ex: trampo).</HintStep>
+                <HintStep n="2">Clique em <strong>"New Project"</strong>, dê um nome (não ative o Neon Auth).</HintStep>
                 <HintStep n="3">No painel do projeto, vá em <strong>"Connection Details"</strong>.</HintStep>
-                <HintStep n="4">Selecione <strong>"Connection string"</strong> e copie a URL completa.</HintStep>
+                <HintStep n="4">Selecione <strong>"Connection string"</strong> (conexão padrão) e copie a URL.</HintStep>
                 <HintStep n="5">A URL começa com <code style={{ color: '#818cf8' }}>postgresql://</code></HintStep>
                 <a href="https://neon.tech" target="_blank" rel="noopener noreferrer" className={s.hintLink}>
                   <IconExternal /> Abrir Neon DB
@@ -544,20 +544,13 @@ export default function SetupPage() {
               <div className={s.doneCheck}><IconCheck /></div>
               <h2 className={s.doneTitle}>Configuração concluída!</h2>
               <p className={s.doneDesc}>
-                O arquivo <code style={{ color: '#818cf8' }}>.env.local</code> foi gerado com sucesso.<br />
-                O servidor encerrou automaticamente. Reinicie para aplicar as configurações:
+                O arquivo <code style={{ color: '#818cf8' }}>.env.local</code> foi gerado com sucesso e<br />
+                <strong>as tabelas do banco de dados foram criadas automaticamente!</strong><br /><br />
+                O servidor encerrou para aplicar as novas variáveis de ambiente.
               </p>
 
               <div className={s.doneCmd}>
-                <div className={s.doneCmdLabel}>1. Crie as tabelas no banco (apenas na primeira vez)</div>
-                <div className={s.codeBlock}>
-                  <span className={s.codeValue}>npx prisma db push</span>
-                  <CopyBtn text="npx prisma db push" id="cmd2" copied={copied} onCopy={copyText} />
-                </div>
-              </div>
-
-              <div className={s.doneCmd}>
-                <div className={s.doneCmdLabel}>2. Inicie o servidor</div>
+                <div className={s.doneCmdLabel}>Inicie o servidor novamente:</div>
                 <div className={s.codeBlock}>
                   <span className={s.codeValue}>npm run dev</span>
                   <CopyBtn text="npm run dev" id="cmd1" copied={copied} onCopy={copyText} />

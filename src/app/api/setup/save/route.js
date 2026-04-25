@@ -1,6 +1,10 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 import { verifyCsrf } from '../../../../lib/csrf';
+import { exec } from 'child_process';
+import util from 'util';
+
+const execAsync = util.promisify(exec);
 
 const REQUIRED = [
   'DATABASE_URL',
@@ -76,8 +80,18 @@ export async function POST(request) {
     return Response.json({ error: `Erro ao gravar .env.local: ${err.message}` }, { status: 500 });
   }
 
+  // Configura o banco automaticamente para o usuário não precisar dar "npx prisma db push" manual
+  try {
+    await execAsync('npx prisma db push --skip-generate', {
+      env: { ...process.env, DATABASE_URL: body.DATABASE_URL }
+    });
+  } catch (err) {
+    console.error('Falha no db push automático:', err);
+    // Mesmo falhando, o .env foi salvo. O usuário apenas terá que fazer manual.
+  }
+
   // Responde o frontend ANTES de encerrar o processo
-  setTimeout(() => process.exit(0), 800);
+  setTimeout(() => process.exit(0), 1000);
 
   return Response.json({ success: true });
 }

@@ -248,7 +248,7 @@ export default function JobForm() {
         <p className={styles.loginSub}>
           Faça login com sua conta do Discord para publicar vagas na{' '}
           <a
-            href={BRAND.discordInvite}
+            href={process.env.NEXT_PUBLIC_DISCORD_SERVER_URL || BRAND.discordInvite}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.communityLink}
@@ -567,7 +567,7 @@ export default function JobForm() {
                 </p>
                 <a
                   id="feedback-discord-invite"
-                  href={BRAND.discordInvite}
+                  href={process.env.NEXT_PUBLIC_DISCORD_SERVER_URL || BRAND.discordInvite}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
