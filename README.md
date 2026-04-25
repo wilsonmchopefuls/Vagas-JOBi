@@ -196,10 +196,14 @@ Admin salva tema → Banco atualizado → Próximo request de qualquer usuário 
 ## 🧙 Método 1 — Setup Wizard (recomendado)
 > Ideal para quem quer configurar tudo pelo navegador, com guias explicativos em cada etapa.
 
+### Passo Zero: Fork no GitHub 🌟
+Antes de começar, faça o **Fork** deste repositório para o seu próprio GitHub clicando no botão **"Fork"** no canto superior direito da página. 
+**Por que isso é importante?** O Fork permite que você hospede o projeto na Vercel e receba futuras atualizações do criador (botão *Sync Fork*) com um clique!
+
 ABRA O TERMINAL
 ```bash
-# 1. Clone o repositório
-git clone https://github.com/WilsonTeofilo/Vagas-JOB-discord.git
+# 1. Clone o SEU repositório (substitua SEU_USUARIO pelo seu nome no GitHub)
+git clone https://github.com/SEU_USUARIO/Vagas-JOB-discord.git
 cd Vagas-JOB-discord
 
 # 2. Instale as dependências
@@ -244,8 +248,11 @@ npm run dev
 
 > Para quem prefere editar arquivos diretamente. Rápido e sem interface.
 
+**1. Faça o Fork** deste repositório no GitHub.
+
 ```bash
-git clone https://github.com/WilsonTeofilo/Vagas-JOB-discord.git
+# 2. Clone o SEU repositório
+git clone https://github.com/SEU_USUARIO/Vagas-JOB-discord.git
 cd Vagas-JOB-discord
 npm install
 ```
@@ -304,16 +311,10 @@ Se você já seguiu os passos de instalação, usou o Setup Wizard e tem o seu a
 
 ### Passo a Passo (Via GitHub — Recomendado para Deploy Automático)
 
-A melhor forma de hospedar é colocar a sua pasta local (já testada) no seu próprio GitHub. Assim, toda vez que tiver uma atualização, a Vercel atualiza o site sozinha.
+Como você já fez o **Fork** no Passo Zero da instalação, hospedar a versão final é um processo de 3 cliques:
 
-1. **Suba seu projeto pro GitHub:**
-   Crie um repositório vazio no seu GitHub. No terminal da sua pasta local, rode:
-   ```bash
-   git remote set-url origin https://github.com/SEU_USUARIO/NOME_DO_SEU_REPO.git
-   git push -u origin main
-   ```
-2. **Importe na Vercel:**
-   Acesse [vercel.com](https://vercel.com) → **New Project** → Importe esse seu novo repositório do GitHub.
+1. **Importe na Vercel:**
+   Acesse [vercel.com](https://vercel.com) → **New Project** → Importe o seu repositório `Vagas-JOB-discord` do GitHub.
 3. **Configure as Variáveis:**
    Na tela de importação da Vercel, abra a seção **Environment Variables**. Abra o seu arquivo `.env.local` no bloco de notas do seu PC, copie **todo o conteúdo** e cole no primeiro campo da Vercel. Ela vai preencher todas as chaves automaticamente!
 4. **Corrija a URL Final:**
