@@ -45,6 +45,7 @@ O **Trampo** é uma aplicação web que serve como mural de oportunidades para c
 
 ### 🛡️ Para Administradores
 - **Painel de Moderação** com aprovação e rejeição de vagas pendentes
+- **Motivo de Recusa Obrigatório**: ao rejeitar uma publicação, o admin deve informar o motivo (enviado via notificação in-app para o autor)
 - **Gerenciamento de Equipe**: promoção e remoção de moderadores (Root → Admin)
 - **Sistema de Bootstrap**: o primeiro usuário a acessar o site vira Root automaticamente
 - **Bypass de Rate Limit** para admins publicarem vagas ilimitadas
