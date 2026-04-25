@@ -211,6 +211,11 @@ ABRA O TERMINAL
 git clone https://github.com/SEU_USUARIO/Vagas-JOB-discord.git
 cd Vagas-JOB-discord
 
+# 🛑 AVISO CRÍTICO: Não faça o clone do link original do projeto! 
+# Se você clonar o link original, quando tentar fazer alguma alteração 
+# e rodar um "git push", o GitHub vai te dar "Permission Denied" porque 
+# você não é o dono. Sempre faça o clone do SEU fork!
+
 # 2. Instale as dependências
 npm install
 
@@ -256,7 +261,7 @@ npm run dev
 **1. Faça o Fork** deste repositório no GitHub.
 
 ```bash
-# 2. Clone o SEU repositório
+# 2. Clone o SEU repositório (Não clone o original, senão dará erro de permissão no git push depois)
 git clone https://github.com/SEU_USUARIO/Vagas-JOB-discord.git
 cd Vagas-JOB-discord
 npm install
