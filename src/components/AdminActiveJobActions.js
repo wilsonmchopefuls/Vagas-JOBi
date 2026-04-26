@@ -47,23 +47,23 @@ export default function AdminActiveJobActions({ jobId }) {
 
   if (isDeleting) {
     return (
-      <div className={styles.rejectForm}>
+      <div style={{ marginTop: '1rem' }}>
         <p style={{ fontSize: '0.8rem', color: '#f87171', marginBottom: '0.5rem', fontWeight: 'bold' }}>
           ⚠️ Isso excluirá a postagem do site E do Discord.
         </p>
         <textarea
-          className={styles.reasonInput}
+          className={styles.textarea}
           placeholder="Justificativa (enviada via notificação, min 20 caracteres)..."
           value={reason}
           onChange={e => setReason(e.target.value)}
           rows={2}
           maxLength={200}
         />
-        <div className={styles.rejectBtns}>
-          <button className={styles.cancelBtn} onClick={() => setIsDeleting(false)} disabled={loading}>
+        <div className={styles.modalActions}>
+          <button className={styles.btnCancel} onClick={() => setIsDeleting(false)} disabled={loading}>
             Cancelar
           </button>
-          <button className={styles.confirmRejectBtn} onClick={handleDelete} disabled={loading || reason.length < 20}>
+          <button className={styles.btnRejectConfirm} onClick={handleDelete} disabled={loading || reason.length < 20}>
             {loading ? 'Deletando...' : 'Confirmar Exclusão'}
           </button>
         </div>
@@ -72,8 +72,8 @@ export default function AdminActiveJobActions({ jobId }) {
   }
 
   return (
-    <div className={styles.actionsRow}>
-      <button className={styles.rejectBtn} onClick={() => setIsDeleting(true)}>
+    <div className={styles.actionsWrap}>
+      <button className={styles.btnReject} onClick={() => setIsDeleting(true)}>
         🗑️ Excluir do Mural e Discord
       </button>
     </div>

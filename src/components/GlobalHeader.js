@@ -171,7 +171,7 @@ export default function GlobalHeader() {
                     {isAdmin && (
                       <>
                         <Link href="/admin" className={s.dropdownItem} role="menuitem" onClick={() => setMenuOpen(false)}>
-                          🛡️ Painel Admin
+                          🛡️ Painel de vagas
                         </Link>
                         {isRoot && (
                           <>
