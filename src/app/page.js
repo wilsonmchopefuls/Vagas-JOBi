@@ -109,8 +109,8 @@ export default async function LandingPage() {
           <Link href="/publicar" className={s.ctaPrimary}>
             Publicar uma Oportunidade
           </Link>
-          <Link href="/sobre" className={s.ctaPrimary}>
-            Saiba Mais →
+          <Link href="/mural" className={s.ctaPrimary} style={{ background: 'transparent', border: '1px solid var(--primary)', color: 'var(--primary)' }}>
+            Explorar Mural →
           </Link>
         </div>
       </section>

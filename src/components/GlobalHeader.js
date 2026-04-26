@@ -87,6 +87,7 @@ export default function GlobalHeader() {
           {/* Nav central */}
           <nav className={s.nav} aria-label="Navegação principal">
             <Link href="/" className={s.navLink}>Início</Link>
+            <Link href="/mural" className={s.navLink}>Mural Público</Link>
             <Link href="/sobre" className={s.navLink}>Sobre</Link>
             <a
               href={BRAND.downloadUrl}
