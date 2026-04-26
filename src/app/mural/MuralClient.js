@@ -60,10 +60,11 @@ export default function MuralClient({ initialJobs, config }) {
     return new Date(dateStr).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
   };
 
-  const isExpired = (dateStr) => {
-    const diffTime = Math.abs(new Date() - new Date(dateStr));
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    return diffDays > 30;
+  const isExpired = (expiresAt) => {
+    if (!expiresAt) return false;
+    const now = new Date();
+    const expires = new Date(expiresAt);
+    return now > expires;
   };
 
   return (
@@ -166,7 +167,7 @@ export default function MuralClient({ initialJobs, config }) {
                     </div>
                   </div>
                   <div className={s.cardBadges}>
-                    {isExpired(job.createdAt) && <span className={s.badge} style={{ color: '#f87171', borderColor: 'rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.1)' }}>⏳ Expirada</span>}
+                    {isExpired(job.expiresAt) && <span className={s.badge} style={{ color: '#f87171', borderColor: 'rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.1)' }}>⏳ Expirada</span>}
                     <span className={`${s.badge} ${s.badgePrimary}`}>{p.level}</span>
                     <span className={s.badge}>{p.regime}</span>
                   </div>
@@ -192,7 +193,7 @@ export default function MuralClient({ initialJobs, config }) {
                   </div>
                 </div>
                 <div className={s.cardBadges}>
-                  {isExpired(job.createdAt) && <span className={s.badge} style={{ color: '#f87171', borderColor: 'rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.1)' }}>⏳ Expirada</span>}
+                  {isExpired(job.expiresAt) && <span className={s.badge} style={{ color: '#f87171', borderColor: 'rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.1)' }}>⏳ Expirada</span>}
                   <span className={`${s.badge} ${s.badgePrimary}`}>{p.availability}</span>
                   {p.educations?.[0]?.course && <span className={s.badge}>{p.educations[0].course}</span>}
                   {p.educations?.[0]?.level && <span className={s.badge}>{p.educations[0].level}</span>}
