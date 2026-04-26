@@ -126,7 +126,9 @@ export default function GlobalHeader() {
               </button>
             ) : (
               <>
-                <NotificationsMenu />
+                <div style={{ display: 'none' }}>
+                  <NotificationsMenu />
+                </div>
                 <div className={s.avatarWrap} ref={menuRef}>
                   <button
                   type="button"
