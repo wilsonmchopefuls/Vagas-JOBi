@@ -101,7 +101,7 @@ export async function sendToDiscord({ body, discordId }) {
   return data.id; // Retorna o messageId do Discord
 }
 
-// ─── Delete ───────────────────────────────────────────────────────────────────
+// ─── Delete (Overwrite para canais de Fórum) ─────────────────────────────────
 export async function deleteFromDiscord(messageId, type) {
   if (!messageId) return;
   const webhookUrl = type === 'vagas'
@@ -111,13 +111,19 @@ export async function deleteFromDiscord(messageId, type) {
   if (!webhookUrl) return;
 
   try {
+    // Como Webhooks não podem deletar tópicos de fórum inteiros, a solução
+    // é SOBRESCREVER o conteúdo da mensagem original (PATCH) com um aviso.
     const response = await fetch(`${webhookUrl}/messages/${messageId}`, {
-      method: 'DELETE',
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: "❌ **[ VAGA ENCERRADA / REMOVIDA ]** ❌\n\nEsta oportunidade foi deletada do sistema e não está mais disponível.\n*(Aviso para Admins: Este tópico já pode ser deletado manualmente).*"
+      })
     });
     if (!response.ok) {
-      console.warn(`Aviso: falha ao deletar mensagem ${messageId} do Discord (${response.status})`);
+      console.warn(`Aviso: falha ao sobrescrever mensagem ${messageId} no Discord (${response.status})`);
     }
   } catch (error) {
-    console.error('Erro de rede ao deletar do Discord:', error);
+    console.error('Erro de rede ao sobrescrever no Discord:', error);
   }
 }
