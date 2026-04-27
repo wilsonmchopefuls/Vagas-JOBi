@@ -113,7 +113,8 @@ export async function deleteFromDiscord(messageId, type) {
   try {
     // Como Webhooks não podem deletar tópicos de fórum inteiros, a solução
     // é SOBRESCREVER o conteúdo da mensagem original (PATCH) com um aviso.
-    const response = await fetch(`${webhookUrl}/messages/${messageId}`, {
+    // IMPORTANTE: Para o Discord, se a mensagem está num tópico, é OBRIGATÓRIO passar o ?thread_id.
+    const response = await fetch(`${webhookUrl}/messages/${messageId}?thread_id=${messageId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
