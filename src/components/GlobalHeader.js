@@ -190,7 +190,7 @@ export default function GlobalHeader() {
                     <Link href="/meus-trampos" className={s.dropdownItem} role="menuitem" onClick={() => setMenuOpen(false)}>
                       💼 Meus Trampos
                     </Link>
-                    <Link href="/form" className={s.dropdownItem} role="menuitem" onClick={() => setMenuOpen(false)}>
+                    <Link href="/publicar" className={s.dropdownItem} role="menuitem" onClick={() => setMenuOpen(false)}>
                       💼 Publicar Oportunidade
                     </Link>
 
